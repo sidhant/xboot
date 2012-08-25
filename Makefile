@@ -68,7 +68,7 @@
 ## MCU = atxmega64a4u
 ## MCU = atxmega128a3u
 ## MCU = atxmega128a4u
-## MCU = atxmega192a3u
+MCU = atxmega192a3u
 ## MCU = atxmega256a3u
 ## MCU = atxmega256a3bu
 ## MCU = atxmega64b1
@@ -108,7 +108,7 @@
 ## MCU = atmega1284p
 ## MCU = atmega2560
 ## MCU = atmega2561
-MCU = atxmega64a3
+## MCU = atxmega64a3
 
 # Is this a bootloader?
 #MAKE_BOOTLOADER=no
@@ -677,11 +677,11 @@ endif
 # ---------------------------------------------------------------------------
 
 # Define directories, if needed.
-#DIRAVR = c:/winavr
-#DIRAVRBIN = $(DIRAVR)/bin
-#DIRAVRUTILS = $(DIRAVR)/utils/bin
-#DIRINC = .
-#DIRLIB = $(DIRAVR)/avr/lib
+DIRAVR = /usr/local/avr
+DIRAVRBIN = $(DIRAVR)/bin
+DIRAVRUTILS = $(DIRAVR)/utils/bin
+DIRINC = .
+DIRLIB = $(DIRAVR)/avr/lib
 
 
 # Define programs and commands.
