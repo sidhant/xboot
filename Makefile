@@ -775,7 +775,7 @@ sym: $(TARGET).sym
 	cp $@ config.mk
 	$(MAKE)
 
--include config.h.mk
+#-include config.h.mk
 
 # Eye candy.
 # AVR Studio 3.x does not check make's exit code but relies on
