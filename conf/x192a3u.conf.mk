@@ -4,7 +4,7 @@
 USE_CONFIG_H = yes
 
 # MCU
-MCU = atxmega192a3u
+MCU = atxmega192a3
 
 # Clock Speed
 # Use 2 MHz internal RC oscillator
