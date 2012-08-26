@@ -8,4 +8,6 @@
 *.o
 *.swp
 *.sym
+config.h
+config.mk
 .dep
