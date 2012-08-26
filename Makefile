@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 # Hey Emacs, this is a -*- makefile -*-
 #
 # General-purpose makefile for ATMEL XMEGA
@@ -68,7 +69,7 @@
 ## MCU = atxmega64a4u
 ## MCU = atxmega128a3u
 ## MCU = atxmega128a4u
-MCU = atxmega192a3u
+## MCU = atxmega192a3u
 ## MCU = atxmega256a3u
 ## MCU = atxmega256a3bu
 ## MCU = atxmega64b1
@@ -677,11 +678,11 @@ endif
 # ---------------------------------------------------------------------------
 
 # Define directories, if needed.
-DIRAVR = /usr/local/avr
-DIRAVRBIN = $(DIRAVR)/bin
-DIRAVRUTILS = $(DIRAVR)/utils/bin
-DIRINC = .
-DIRLIB = $(DIRAVR)/avr/lib
+# DIRAVR = /usr/local/avr
+# DIRAVRBIN = $(DIRAVR)/bin
+# DIRAVRUTILS = $(DIRAVR)/utils/bin
+# DIRINC = .
+# DIRLIB = $(DIRAVR)/avr/lib
 
 
 # Define programs and commands.
@@ -775,7 +776,7 @@ sym: $(TARGET).sym
 	cp $@ config.mk
 	$(MAKE)
 
-#-include config.h.mk
+-include config.h.mk
 
 # Eye candy.
 # AVR Studio 3.x does not check make's exit code but relies on
