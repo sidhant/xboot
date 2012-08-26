@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 # Hey Emacs, this is a -*- makefile -*-
 #
 # General-purpose makefile for ATMEL XMEGA
@@ -108,7 +109,7 @@
 ## MCU = atmega1284p
 ## MCU = atmega2560
 ## MCU = atmega2561
-MCU = atxmega64a3
+## MCU = atxmega64a3
 
 # Is this a bootloader?
 #MAKE_BOOTLOADER=no
@@ -660,9 +661,6 @@ ifneq ($(filter $(MCU_S), m2560 m2561),)
   endif
 endif
 
-ifeq ($(BOOT_SECTION_START),)
-  $(error $(MCU) not found in makefile, BOOT_SECTION_START not defined!)
-endif
 
 ifeq ($(MAKE_BOOTLOADER), yes)
 # BOOT_SECTION_START (=Start of Boot Loader section
@@ -677,11 +675,11 @@ endif
 # ---------------------------------------------------------------------------
 
 # Define directories, if needed.
-#DIRAVR = c:/winavr
-#DIRAVRBIN = $(DIRAVR)/bin
-#DIRAVRUTILS = $(DIRAVR)/utils/bin
-#DIRINC = .
-#DIRLIB = $(DIRAVR)/avr/lib
+# DIRAVR = /usr/local/avr
+# DIRAVRBIN = $(DIRAVR)/bin
+# DIRAVRUTILS = $(DIRAVR)/utils/bin
+# DIRINC = .
+# DIRLIB = $(DIRAVR)/avr/lib
 
 
 # Define programs and commands.
@@ -754,12 +752,10 @@ ALL_CFLAGS = -mmcu=$(MCU) -I. $(CFLAGS) $(GENDEPFLAGS) $(DEFINES)
 ALL_CXXFLAGS = -mmcu=$(MCU) -I. $(CXXFLAGS) $(GENDEPFLAGS) $(DEFINES)
 ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS) $(DEFINES)
 
-
-
-
+SHELL = /bin/bash
 
 # Default target.
-all: begin gccversion sizebefore build sizeafter finished end
+all: checkconfig begin gccversion sizebefore build sizeafter finished end
 
 build: elf hex eep lss sym
 
@@ -769,13 +765,20 @@ eep: $(TARGET).eep
 lss: $(TARGET).lss
 sym: $(TARGET).sym
 
-
 # Configuration support
 %.conf %.conf.mk: force
-	cp $@ config.mk
-	$(MAKE)
+	cp conf/$@ config.mk
 
 -include config.h.mk
+
+checkconfig:
+	@if [ "$(BOOT_SECTION_START)" = "" ]; then \
+		echo "No MCU defined! Run make <conf_file> or add config.mk manually $(SHELL)"; exit 2; \
+		else true; fi
+	@if [ "$(BOOT_SECTION_START)" = "" ]; then \
+		echo "$(MCU) not found in makefile, BOOT_SECTION_START not defined!"; exit 2; \
+		else true; fi
+	
 
 # Eye candy.
 # AVR Studio 3.x does not check make's exit code but relies on
