@@ -136,7 +136,7 @@ BOOTSZ=0
 # nothing and has the added advantage of leaving the application
 # section in tact
 # Note: ignored if MAKE_BOOTLOADER is not set
-PROG_BOOT_ONLY=yes
+#PROG_BOOT_ONLY=yes
 
 # CPU Frequency
 F_CPU=2000000
